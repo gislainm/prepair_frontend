@@ -1,0 +1,132 @@
+.logoDesign {
+  display: flex;
+  align-items: center;
+}
+
+.name {
+  font-size: 1.25rem;
+  color: #C7CBD3;
+  font-weight: 700;
+}
+
+.logoImage {
+  width: 60px;
+  top: 0;
+  left: 0;
+}
+
+mat-toolbar {
+  background-color: #3C4B67;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1040;
+  box-shadow: 0 0.5rem 1rem 0 #1a1f33;
+}
+
+a {
+  text-decoration: none;
+}
+
+::ng-deep .header-menu {
+  background-color: #1a1f33 !important;
+}
+
+.user-picture-container {
+  height: 2.5rem;
+  width: 2.5rem;
+  background-color: transparent;
+  border: 1px solid #151a30;
+  border-radius: 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.logoutCont {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.user-name {
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.25rem;
+  color: #C7CBD3;
+  cursor: pointer;
+  padding-left: 7px;
+}
+
+.user-name:hover {
+  color: #8d6403f0;
+}
+
+mat-toolbar {
+  display: flex;
+  flex-direction: row;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.nav-btn {
+  padding-left: 1.2rem;
+  padding-right: 1.2rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  margin-right: 0.3rem;
+  margin-left: 0.3rem;
+  font-size: 1rem;
+}
+.active{
+  background-color: #ffa826;
+  color:#394762 !important;
+  font-weight: 700;
+}
+
+.sidenav {
+  min-width: 300px;
+  padding: 10px;
+  background-color:#8caeef;
+}
+
+.draw-btn {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 10px;
+  margin: 10px;
+}
+
+
+.menu-btn {
+  display: none;
+}
+
+@media screen and (max-width: 950px) {
+  .mat-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .routerCont {
+    display: none;
+  }
+
+  .small-screen {
+    display: inline;
+  }
+
+  .menu-btn {
+    display: inline;
+  }
+  .logoDesign{
+    display: none;
+  }
+}
+
+mat-drawer-container {
+  background-color: #14162E !important;
+}

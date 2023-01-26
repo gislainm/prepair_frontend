@@ -1,0 +1,243 @@
+<div class="container">
+  <div class="row">
+    <section class="discussions">
+      <div class="discussion search">
+        <div class="searchbar">
+          <mat-icon style="color:#1d3140; font-weight: 700; font-size: 24px;">search</mat-icon>
+          <input class='searchInput' type="text" placeholder="Search..." [value]="searchInput"
+            (keyup)="SearchMessage($event)">
+        </div>
+      </div>
+      <div class="discussion" [ngClass]="{'message-active':selectedMess=== collaborator.collaborator._id && !firstMessaMentor || collaborator.collaborator._id === newMentorMess_Id && firstMessaMentor}"
+        *ngFor="let collaborator of collaborators"
+        (click)="selectRoom(collaborator.collaborator._id,collaborator.collaborator.Firstname,collaborator.collaborator.Lastname)">
+        <div class="photo" style="background-image: url(/assets/img/{{collaborator.collaborator.Image}});">
+        </div>
+        <div class="desc-contact">
+          <p class="name">{{collaborator.collaborator.Firstname + ' '+ collaborator.collaborator.Lastname }}</p>
+          <p class="message">{{collaborator.lastMessage}}</p>
+        </div>
+      </div>
+    </section>
+    <section class="chat" *ngIf="!firstMessaMentor">
+      <div class="header-chat">
+        <mat-icon class="icon" *ngIf="messageLoaded">person</mat-icon>
+        <p class="name">{{selectedColab}}</p>
+      </div>
+      <div class="messages-chat" *ngIf="messageLoaded">
+        <div class="message" *ngFor="let message of activeRoom.messages">
+          <div [ngClass]="{'response':message.sender === user_id}">
+            <p class="text">{{message.messageBody}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="footer-chat" *ngIf="messageLoaded">
+        <form [formGroup]="messageForm" (ngSubmit)="sendMessage()">
+          <mat-form-field appearance="outline" class="col-md-10 message-field">
+            <mat-label>Enter your message</mat-label>
+            <textarea matInput placeholder="Hey there!!" formControlName="message" cdkTextareaAutosize
+              #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5">
+          </textarea>
+            <mat-icon matPrefix>mood</mat-icon>
+            <mat-error *ngIf=""></mat-error>
+          </mat-form-field>
+          <button mat-mini-fab color="primary" style="color: white; margin-top: 10px;" type="submit" [disabled]="!messageForm.value.message">
+            <mat-icon class="sendBtn">send</mat-icon>
+          </button>
+        </form>
+      </div>
+    </section>
+    <section class="chat" *ngIf="firstMessaMentor">
+      <div class="header-chat">
+        <mat-icon class="icon">person</mat-icon>
+        <p class="name">{{newMentorMessFirstname+' '+newMentorMessLastname}}</p>
+      </div>
+      <div class="messages-chat">
+      </div>
+      <div class="footer-chat">
+        <form [formGroup]="messageForm" (ngSubmit)="sendMessageToNewMentor()">
+          <mat-form-field appearance="outline" class="col-md-10 message-field">
+            <mat-label>Enter your message</mat-label>
+            <textarea matInput placeholder="Hey there!!" formControlName="message" cdkTextareaAutosize
+              #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5">
+          </textarea>
+            <mat-icon matPrefix>mood</mat-icon>
+            <mat-error *ngIf=""></mat-error>
+          </mat-form-field>
+          <button mat-mini-fab color="primary" style="color: white; margin-top: 10px;" type="submit" [disabled]="!messageForm.value.message">
+            <mat-icon class="sendBtn">send</mat-icon>
+          </button>
+        </form>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- <div class="container">
+  <div class="row">
+    <section class="discussions">
+      <div class="discussion search">
+        <div class="searchbar">
+          <mat-icon style="color:#1d3140; font-weight: 700; font-size: 24px;">search</mat-icon>
+          <input  class='searchInput' type="text" placeholder="Search..." [value]="searchInput" (change)="SearchMessage($event)">
+        </div>
+      </div>
+      <div class="discussion message-active">
+        <div class="photo"
+          style="background-image: url(https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80);">
+        </div>
+        <div class="desc-contact">
+          <p class="name">Megan Leib</p>
+          <p class="message">9 pm at the bar if possible 😳</p>
+        </div>
+      </div>
+
+      <div class="discussion">
+        <div class="photo"
+          style="background-image: url(https://i.pinimg.com/originals/a9/26/52/a926525d966c9479c18d3b4f8e64b434.jpg);">
+        </div>
+        <div class="desc-contact">
+          <p class="name">Dave Corlew</p>
+          <p class="message">Let's meet for a coffee or something today ?</p>
+        </div>
+      </div>
+
+      <div class="discussion">
+        <div class="photo"
+          style="background-image: url(https://images.unsplash.com/photo-1497551060073-4c5ab6435f12?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=667&q=80);">
+        </div>
+        <div class="desc-contact">
+          <p class="name">Jerome Seiber</p>
+          <p class="message">I've sent you the annual report</p>
+        </div>
+      </div>
+
+      <div class="discussion">
+        <div class="photo" style="background-image: url(https://card.thomasdaubenton.com/img/photo.jpg);">
+          <div class="online"></div>
+        </div>
+        <div class="desc-contact">
+          <p class="name">Thomas Dbtn</p>
+          <p class="message">See you tomorrow ! 🙂</p>
+        </div>
+      </div>
+
+      <div class="discussion">
+        <div class="photo"
+          style="background-image: url(https://images.unsplash.com/photo-1553514029-1318c9127859?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80);">
+        </div>
+        <div class="desc-contact">
+          <p class="name">Elsie Amador</p>
+          <p class="message">What is going on ?</p>
+        </div>
+      </div>
+
+      <div class="discussion">
+        <div class="photo"
+          style="background-image: url(https://images.unsplash.com/photo-1541747157478-3222166cf342?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=967&q=80);">
+        </div>
+        <div class="desc-contact">
+          <p class="name">Billy Southard</p>
+          <p class="message">Ahahah 😂</p>
+        </div>
+      </div>
+
+      <div class="discussion">
+        <div class="photo"
+          style="background-image: url(https://images.unsplash.com/photo-1541747157478-3222166cf342?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=967&q=80);">
+        </div>
+        <div class="desc-contact">
+          <p class="name">Billy Southard</p>
+          <p class="message">Ahahah 😂</p>
+        </div>
+      </div>
+
+      <div class="discussion">
+        <div class="photo"
+          style="background-image: url(https://images.unsplash.com/photo-1541747157478-3222166cf342?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=967&q=80);">
+        </div>
+        <div class="desc-contact">
+          <p class="name">Billy Southard</p>
+          <p class="message">Ahahah 😂</p>
+        </div>
+      </div>
+
+      <div class="discussion">
+        <div class="photo"
+          style="background-image: url(https://images.unsplash.com/photo-1541747157478-3222166cf342?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=967&q=80);">
+        </div>
+        <div class="desc-contact">
+          <p class="name">Billy Southard</p>
+          <p class="message">Ahahah 😂</p>
+        </div>
+      </div>
+
+      <div class="discussion">
+        <div class="photo"
+          style="background-image: url(https://images.unsplash.com/photo-1541747157478-3222166cf342?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=967&q=80);">
+        </div>
+        <div class="desc-contact">
+          <p class="name">Billy Southard</p>
+          <p class="message">Ahahah 😂</p>
+        </div>
+      </div>
+    </section>
+    <section class="chat">
+      <div class="header-chat">
+        <mat-icon class="icon">person</mat-icon>
+        <p class="name">Megan Leib</p>
+      </div>
+      <div class="messages-chat">
+        <div class="message">
+          <p class="text"> Hi, how are you ? </p>
+        </div>
+        <div class="message">
+          <p class="text"> What are you doing tonight ? Want to go take a drink ?</p>
+        </div>
+        <div class="message">
+          <div class="response">
+            <p class="text"> Hey Megan ! It's been a while 😃</p>
+          </div>
+        </div>
+        <div class="message">
+          <div class="response">
+            <p class="text"> When can we meet ?</p>
+          </div>
+        </div>
+        <div class="message">
+          <p class="text"> 9 pm at the bar if possible 😳</p>
+        </div>
+        <div class="message">
+          <p class="text"> 9 pm at the bar if possible 😳</p>
+        </div>
+        <div class="message">
+          <p class="text"> 9 pm at the bar if possible 😳</p>
+        </div>
+        <div class="message">
+          <p class="text"> 9 pm at the bar if possible 😳</p>
+        </div>
+        <div class="message">
+          <p class="text"> 9 pm at the bar if possible 😳</p>
+        </div>
+        <div class="message">
+          <p class="text"> 9 pm at the bar if possible 😳</p>
+        </div>
+      </div>
+      <div class="footer-chat">
+        <form [formGroup]="messageForm" (ngSubmit)="sendMessage()">
+          <mat-form-field appearance="outline" class="col-md-10 message-field">
+            <mat-label>Enter your message</mat-label>
+            <textarea matInput placeholder="Hey there!!" formControlName="message" cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
+              cdkAutosizeMaxRows="5">
+          </textarea>
+            <mat-icon matPrefix>mood</mat-icon>
+            <mat-error *ngIf=""></mat-error>
+          </mat-form-field>
+          <button mat-mini-fab color="primary" style="color: white; margin-top: 10px;" type="submit">
+            <mat-icon class="sendBtn">send</mat-icon>
+          </button>
+        </form>
+      </div>
+    </section>
+  </div>
+</div> -->

@@ -1,0 +1,216 @@
+<div class="container">
+  <div class="logoDesign">
+    <img class="logoDesign" src="/assets/img/prePair-logos_transparent.png">
+  </div>
+  <div class="logo-form">
+    <div class="logo">
+      <div>
+        <img id="ellipse" src="/assets/img/Ellipse 2.png" />
+        <h3>PrePair</h3>
+        <h6>Community based Mentorship for <br> college STEM students</h6>
+      </div>
+      <img id="logoimg" src="/assets/img/pre-pair_logo.png" alt="mentor and mentee cartoon" />
+    </div>
+    <div class="form">
+      <span class="title">Registration</span>
+      <mat-horizontal-stepper [linear]="true" [animationDuration]="animDuration" #stepper>
+
+        <!-- Icon overrides. -->
+        <ng-template matStepperIcon="user">
+          <mat-icon>verified_user</mat-icon>
+        </ng-template>
+        <ng-template matStepperIcon="Bio">
+          <mat-icon>contacts</mat-icon>
+        </ng-template>
+        <ng-template matStepperIcon="school">
+          <mat-icon>school</mat-icon>
+        </ng-template>
+        <ng-template matStepperIcon="career">
+          <mat-icon>work</mat-icon>
+        </ng-template>
+        <ng-template matStepperIcon="help">
+          <mat-icon>help</mat-icon>
+        </ng-template>
+
+        <mat-step [stepControl]="firstFormGroup" label="Signup info" state="user">
+          <form [formGroup]="firstFormGroup">
+            <mat-form-field appearance="outline">
+              <mat-label>Firstname</mat-label>
+              <input matInput placeholder="Enter your firstname" formControlName="Firstname">
+              <mat-icon matPrefix>person</mat-icon>
+              <mat-error *ngIf=""></mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Lastname</mat-label>
+              <input matInput placeholder="Enter your lastname" formControlName="Lastname">
+              <mat-icon matPrefix>person</mat-icon>
+              <mat-error *ngIf=""></mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Email</mat-label>
+              <input matInput placeholder="Enter your lastname" formControlName="email">
+              <mat-icon matPrefix>email</mat-icon>
+              <mat-error *ngIf=""></mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Password</mat-label>
+              <input matInput placeholder="Enter your Password" [type]="hide ? 'password' : 'text'"
+                formControlName="Password">
+              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+              <mat-icon matPrefix>lock</mat-icon>
+              <mat-error *ngIf=""></mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Register as:</mat-label>
+              <mat-select [(value)]="uRole" formControlName="Role">
+                <mat-option value="Mentor">A Mentor</mat-option>
+                <mat-option value="Student">A Student</mat-option>
+              </mat-select>
+              <mat-icon matPrefix>verified</mat-icon>
+            </mat-form-field>
+            <div style="display: flex; justify-content: flex-end;">
+              <button mat-raised-button matStepperNext color="primary" style="color: white;" (click)="prepFormTwo()">
+                <label>Next</label>
+                <mat-icon matPrefix>arrow_forward</mat-icon>
+              </button>
+            </div>
+            <div class="login-signup">
+              <span class="text">Already a member?
+                <a routerLink="/prepair/login"class="text signup-link" style="color: #ffa726;" >Login Now</a>
+              </span>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step [label]="step2Label" [state]="step2State">
+          <form *ngIf="mentor" [formGroup]="secondFormGroupM">
+            <mat-form-field appearance="outline">
+              <mat-label>Company</mat-label>
+              <input matInput placeholder="Which company do you currently work for?" formControlName="Company">
+              <mat-icon matPrefix>work</mat-icon>
+              <mat-error *ngIf=""></mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Job</mat-label>
+              <input matInput placeholder="What is your current job title?" formControlName="Job">
+              <mat-icon matPrefix>title</mat-icon>
+              <mat-error *ngIf=""></mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Highest level of education:</mat-label>
+              <mat-select [(value)]="education" formControlName="LevelOfEducation" required>
+                <mat-option value="Highschool">Highschool</mat-option>
+                <mat-option value="Bachelors">Bachelor's degree</mat-option>
+                <mat-option value="Masters">Masters degree</mat-option>
+                <mat-option value="PhD">PhD</mat-option>
+              </mat-select>
+              <mat-icon matPrefix>school</mat-icon>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>What best describes your discipline:</mat-label>
+              <mat-select [(value)]="inputDiscipline" formControlName="Discipline" required>
+                <mat-option value="Agric">Agriculture/Natural Resources</mat-option>
+                <mat-option value="Bios">Biological and Biomedical Sciences</mat-option>
+                <mat-option value="Comp">Computer Science/Info Sciences/Support Tech</mat-option>
+                <mat-option value="Eng">Engineering</mat-option>
+                <mat-option value="Healp">Health Professions</mat-option>
+                <mat-option value="Math">Mathematics and Statistics</mat-option>
+                <mat-option value="Phys">Physical Sciences</mat-option>
+                <mat-option value="Psyc">Psychology</mat-option>
+              </mat-select>
+              <mat-icon matPrefix>history_edu</mat-icon>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>School</mat-label>
+              <input matInput placeholder="From which school did you get your degree?" formControlName="University">
+              <mat-icon matPrefix>workspace_premium</mat-icon>
+              <mat-error *ngIf=""></mat-error>
+            </mat-form-field>
+            <div style="display: flex; justify-content: space-between;">
+              <button mat-raised-button matStepperPrevious color="primary" style="color: white;">
+                <label>Previous</label>
+                <mat-icon matPrefix>arrow_backward</mat-icon>
+              </button>
+              <button mat-raised-button matStepperNext color="primary" style="color: white;">
+                <label>Next</label>
+                <mat-icon matPrefix>arrow_forward</mat-icon>
+              </button>
+            </div>
+          </form>
+          <form *ngIf="student" [formGroup]="secondFormGroupS">
+            <mat-form-field appearance="outline">
+              <mat-label>Major</mat-label>
+              <input matInput placeholder="What is your major?" formControlName="Major">
+              <mat-icon matPrefix>edit_square</mat-icon>
+              <mat-error *ngIf=""></mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>What year are you in school:</mat-label>
+              <mat-select [(value)]="YearInSchool" formControlName="YearInSchool" required>
+                <mat-option value="Freshman">Freshman</mat-option>
+                <mat-option value="Sophomore">Sophomore</mat-option>
+                <mat-option value="Junior">Junior</mat-option>
+                <mat-option value="Senior">Senior</mat-option>
+              </mat-select>
+              <mat-icon matPrefix>history_edu</mat-icon>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>school</mat-label>
+              <input matInput placeholder="Which school are you currently attending?" formControlName="University">
+              <mat-icon matPrefix>school</mat-icon>
+              <mat-error *ngIf=""></mat-error>
+            </mat-form-field>
+            <div style="display: flex; justify-content: space-between;">
+              <button mat-raised-button matStepperPrevious color="primary" style="color: white;">
+                <label>Previous</label>
+                <mat-icon matPrefix>arrow_backward</mat-icon>
+              </button>
+              <button mat-raised-button matStepperNext color="primary" style="color: white;">
+                <label>Next</label>
+                <mat-icon matPrefix>arrow_forward</mat-icon>
+              </button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step label="Bio Info" state="Bio">
+          <form [formGroup]="thirdForm">
+            <mat-form-field appearance="outline">
+              <mat-label>Age</mat-label>
+              <input matInput placeholder="What is your age?" type="number" formControlName="Age">
+              <mat-icon matPrefix>pin</mat-icon>
+              <mat-error *ngIf=""></mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Gender:</mat-label>
+              <mat-select [(value)]="inputGender" formControlName="Gender" required>
+                <mat-option value="Male">Male</mat-option>
+                <mat-option value="Female">Female</mat-option>
+                <mat-option value="Other">Other</mat-option>
+              </mat-select>
+              <mat-icon matPrefix>person</mat-icon>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Bio</mat-label>
+              <textarea matInput placeholder="Please enter a short bio about yourself" formControlName="Bio"></textarea>
+              <mat-icon matPrefix>description</mat-icon>
+              <mat-error *ngIf=""></mat-error>
+            </mat-form-field>
+            <div style="display: flex; justify-content: space-between;">
+              <button mat-raised-button matStepperPrevious color="primary" style="color: white;">
+                <label>Previous</label>
+                <mat-icon matPrefix>arrow_backward</mat-icon>
+              </button>
+              <button mat-raised-button matStepperNext color="primary" style="color: white;" (click)="registerUser()">
+                <label>Signup</label>
+                <mat-icon matPrefix>login</mat-icon>
+              </button>
+            </div>
+              <p class="erroMessage">{{errorMessage}}</p>
+          </form>
+        </mat-step>
+      </mat-horizontal-stepper>
+    </div>
+  </div>
+</div>

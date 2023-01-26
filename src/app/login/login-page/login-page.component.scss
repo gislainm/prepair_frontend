@@ -1,0 +1,157 @@
+#logoimg {
+  max-width: 500px;
+}
+
+.logo {
+  color: #fff;
+  text-align: center;
+  font-family: Inter, sans-serif;
+}
+
+#ellipse {
+  max-width: 20%;
+  position: fixed;
+  top: 4%;
+  left: 20%;
+  opacity: 0.5;
+}
+
+.logoDesign {
+  display: flex;
+  position: absolute;
+  width: 150px;
+  top: 0;
+  left: 0;
+}
+
+.success {
+  background-color: #4070f4 !important;
+  color: #fff;
+}
+
+.logo-form {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 20%;
+  align-items: center;
+}
+
+form {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.form {
+  border: 2px rgb(119, 118, 118) solid;
+  border-radius: 10px;
+  box-shadow: rgb(143, 143, 143);
+  padding: 20px;
+  background-color: #0f1233;
+  margin-left: 5%;
+  margin-right: 5%;
+  height: 450px;
+  width: 28rem;
+}
+
+mat-form-field {
+  display: block;
+  width: 100%;
+}
+
+.container .form .title {
+  position: relative;
+  font-size: 27px;
+  font-weight: 600;
+}
+
+.form .title::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 5px;
+  width: 32px;
+  background-color: #ffa726;
+  border-radius: 25px;
+}
+
+.form .checkbox-text {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.checkbox-text .checkbox-content {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox-content input {
+  margin: 0 8px -2px 4px;
+  accent-color: #ffa726;
+}
+
+.btn-container {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+button {
+  width: 100%;
+}
+
+.form .login-signup {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.erroMessage {
+  color: #D84315;
+  text-align: center;
+  margin-top: 5px;
+}
+
+
+@media (max-width: 999px) {
+  .logo-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin-top: 20%;
+  }
+
+  .form {
+    border: 2px rgb(119, 118, 118) solid;
+    border-radius: 10px;
+    box-shadow: rgb(143, 143, 143);
+    padding: 20px;
+    background-color: #0f1233;
+    margin-left: 5%;
+    margin-right: 5%;
+    width: 450px;
+  }
+
+  #ellipse {
+    max-width: 20%;
+    position: fixed;
+    top: 4%;
+    left: 20%;
+    opacity: 0.5;
+  }
+}
+
+h3 {
+  font-size: 65px;
+  font-weight: 800;
+}
+
+h6 {
+  font-size: 20px;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  color: DDA82A;
+  font-weight: normal;
+}

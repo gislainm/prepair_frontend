@@ -1,0 +1,154 @@
+<div class="container">
+  <mat-drawer-container>
+    <mat-drawer mode="side" opened="true" class="profile-tab-nav">
+      <div class="p-4">
+        <div class="img-circle text-center mb-3">
+          <img src="/assets/img/{{user_Imange}}" alt="Image" class="shadow" id="userImage">
+        </div>
+        <h4 class="text-center mb-0">{{Username}}</h4>
+        <div class="text-center mb-0">{{roleC}}</div>
+      </div>
+      <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+        <a class="nav-link" (click)="selectAccount()" [ngClass]="{'active':selectedTab==='account'}">
+          <i class="fa fa-home text-center mr-1"></i>
+          Account
+        </a>
+        <a class="nav-link" (click)="selectPassword()" [ngClass]="{'active':selectedTab==='password'}">
+          <i class="fa fa-key text-center mr-1"></i>
+          Password
+        </a>
+        <a class="nav-link" (click)="selectEducationCareer()" [ngClass]="{'active':selectedTab==='education-career'}">
+          <i class="fa fa-tv text-center mr-1"></i>
+          Education/Career
+        </a>
+      </div>
+    </mat-drawer>
+    <mat-drawer-content class="tab-content p-4 p-md-5" id="v-pills-tabContent">
+      <form [formGroup]="accountForm" (ngSubmit)="updateAccount()" class="row" *ngIf="selectedTab==='account'">
+        <h3 class="mb-4">Account Settings</h3>
+        <mat-form-field appearance="outline" class="col-md-5">
+          <mat-label>Firstname</mat-label>
+          <input matInput placeholder="Enter your firstname" formControlName="Firstname">
+          <mat-icon matPrefix>person</mat-icon>
+          <mat-error *ngIf=""></mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="col-md-5">
+          <mat-label>Lastname</mat-label>
+          <input matInput placeholder="Enter your lastname" formControlName="Lastname">
+          <mat-icon matPrefix>person</mat-icon>
+          <mat-error *ngIf=""></mat-error>
+        </mat-form-field>
+        <mat-radio-group [(ngModel)]="genderC" class="col-md-5" [ngModelOptions]="{standalone: true}">
+          <label>Gender</label>
+          <mat-radio-button class="form-check" value="Male" color="primary" [checked]="male">Male</mat-radio-button>
+          <mat-radio-button class="form-check" value="Female" color="primary"
+            [checked]="female">Female</mat-radio-button>
+        </mat-radio-group>
+        <mat-form-field appearance="outline" class="col-md-5">
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="Enter your email" formControlName="email">
+          <mat-icon matPrefix>email</mat-icon>
+          <mat-error *ngIf=""></mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="col-md-5">
+          <mat-label>Age</mat-label>
+          <input matInput placeholder="Enter your age" formControlName="Age">
+          <mat-icon matPrefix>pin</mat-icon>
+          <mat-error *ngIf=""></mat-error>
+        </mat-form-field>
+        <mat-radio-group [(ngModel)]="roleC" class="col-md-5 radio-btn-group" [ngModelOptions]="{standalone: true}">
+          <label>Role</label>
+          <mat-radio-button class="form-check" value="Mentor" color="primary" [checked]="ment">Mentor</mat-radio-button>
+          <mat-radio-button class="form-check" value="Student" color="primary"
+            [checked]="stud">Student</mat-radio-button>
+        </mat-radio-group>
+        <mat-form-field appearance="outline" class="col-md-10">
+          <mat-label>Bio</mat-label>
+          <textarea matInput placeholder="Please enter a short bio about yourself" formControlName="Bio"></textarea>
+          <mat-icon matPrefix>description</mat-icon>
+        </mat-form-field>
+        <div>
+          <button mat-raised-button class="saveBtn" type="submit" [disabled]="accountForm.invalid">
+            <mat-icon>check_circle</mat-icon>
+            Save
+          </button>
+          <button mat-raised-button color="primary" style="color: white;">
+            <mat-icon>cancel</mat-icon>
+            Cancel
+          </button>
+        </div>
+      </form>
+      <form [formGroup]="passwordForm" (ngSubmit)="updatePassword()" class="row" *ngIf="selectedTab==='password'">
+        <h3 class="mb-4">Password Settings</h3>
+        <mat-form-field appearance="outline" class="col-md-5">
+          <mat-label>Old Password</mat-label>
+          <input matInput placeholder="Enter your old password" formControlName="oldPassword"
+            [type]="hide ? 'password' : 'text'">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+          <mat-icon matPrefix>lock</mat-icon>
+          <mat-error *ngIf=""></mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="col-md-5">
+          <mat-label>New Password</mat-label>
+          <input matInput placeholder="Enter your lastname" formControlName="newPassword"
+            [type]="hide ? 'password' : 'text'">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+          <mat-icon matPrefix>lock</mat-icon>
+          <mat-error *ngIf=""></mat-error>
+        </mat-form-field>
+        <div>
+          <button mat-raised-button class="saveBtn" type="submit" [disabled]="passwordForm.invalid">
+            <mat-icon>check_circle</mat-icon>
+            Save
+          </button>
+          <button mat-raised-button color="primary" style="color: white;">
+            <mat-icon>cancel</mat-icon>
+            Cancel
+          </button>
+        </div>
+      </form>
+      <form [formGroup]="educationForm" (ngSubmit)="updateEducation()" class="row"
+        *ngIf="selectedTab==='education-career'">
+        <h3 class="mb-4">Education Settings</h3>
+        <mat-form-field appearance="outline" class="col-md-5">
+          <mat-label>Major</mat-label>
+          <input matInput placeholder="Enter your major" formControlName="Major">
+          <mat-icon matPrefix>edit_square</mat-icon>
+          <mat-error *ngIf=""></mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="col-md-5">
+          <mat-label>What year are you in school:</mat-label>
+          <mat-select [(value)]="YearInSchoolC" formControlName="YearInSchool" required>
+            <mat-option value="Freshman">Freshman</mat-option>
+            <mat-option value="Sophomore">Sophomore</mat-option>
+            <mat-option value="Junior">Junior</mat-option>
+            <mat-option value="Senior">Senior</mat-option>
+          </mat-select>
+          <mat-icon matPrefix>history_edu</mat-icon>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="col-md-5">
+          <mat-label>school</mat-label>
+          <input matInput placeholder="Enter your school" formControlName="University">
+          <mat-icon matPrefix>school</mat-icon>
+          <mat-error *ngIf=""></mat-error>
+        </mat-form-field>
+        <div>
+          <button mat-raised-button class="saveBtn" type="submit" [disabled]="educationForm.invalid">
+            <mat-icon>check_circle</mat-icon>
+            Save
+          </button>
+          <button mat-raised-button color="primary" style="color: white;">
+            <mat-icon>cancel</mat-icon>
+            Cancel
+          </button>
+        </div>
+      </form>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</div>

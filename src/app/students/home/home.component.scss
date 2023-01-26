@@ -1,0 +1,138 @@
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0");
+
+.container {
+  max-width: 1500px !important;
+  margin-bottom: 100px;
+  margin-top: 100px;
+}
+
+.card-mentor-wrpr {
+  width: 100%;
+  display: flex;
+  gap: 50px;
+  justify-content: center;
+  align-content: center;
+  height: 200px;
+}
+
+.card-wrpr {
+  width: 100%;
+}
+
+.card-mentor {
+  width: 400px;
+  border: 0px solid #1b1e41;
+  border-radius: 20px;
+  box-shadow: 0px 0px 5px rgb(0 0 0 / 50%);
+  height: 350px;
+  overflow-y: visible;
+  background-color: 	#FFE5C1;
+}
+
+.card-mentor p {
+  padding: 18px;
+  font-size: 1.4rem;
+  line-height: 26px;
+  text-align: center;
+  font-family: 'EB Garamond', serif;
+  color: #3C4B67
+}
+
+.card-mentor img {
+  width: 100%;
+  border-radius: 20px 20px 0 0;
+
+}
+
+.send-message img {
+  width: 100%;
+
+}
+
+.title {
+  font-size: 2.3rem;
+  margin-bottom: 30px;
+  color: #fff;
+  font-family: 'EB Garamond', serif;
+}
+
+.space {
+  height: 250px;
+  // background-color: #e1a210ce;
+}
+
+.message {
+  padding-top: 100px;
+  // background-color: #e1a210ce;
+}
+
+.mssg p {
+  color: #fff;
+  font-family: 'Bad Script', cursive;
+  font-size: 16px;
+  font-style: italic;
+  margin: 10px
+}
+
+.mssg-title {
+  font-family: 'EB Garamond', serif !important;
+  font-size: 38px !important;
+  color:#fff !important;
+}
+
+.text {
+  display: flex;
+  align-items: center;
+  font-size: 2rem;
+  font-family: 'EB Garamond', serif !important;
+
+
+}
+
+.text a {
+  text-decoration: none;
+  color: #1D1B40;
+  font-size: 3rem;
+}
+
+.img-st {
+  width: 100%;
+}
+
+.material-symbols-outlined {
+  font-family: "Material Symbols Outlined";
+  font-weight: bolder;
+  font-style: normal;
+  font-size: 51px !important;
+  line-height: 7;
+  margin: 0 28px;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  overflow-wrap: normal;
+  direction: ltr;
+  font-feature-settings: "liga";
+  -webkit-font-smoothing: antialiased;
+}
+
+.footer {
+  height: 200px;
+  // background-color: #e1a210ce;
+}
+
+.prep-link:hover {
+  color: #DA8F20 !important;
+}
+
+.prep-link {
+  text-decoration: none !important;
+  color: #ffa726 !important;
+}
+
+.m-prog {
+  font-size: 3rem;
+  font-family: 'Poiret One', cursive !important;
+  font-weight: bolder;
+  margin: 2px 0px;
+}

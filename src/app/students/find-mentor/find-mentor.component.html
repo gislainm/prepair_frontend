@@ -1,0 +1,51 @@
+<div class="grid-container">
+  <div class="text-center text-white">
+    <h1 class="m-3 c-nav">Mentors</h1>
+    <mat-form-field appearance="outline" class="col-md-3">
+      <mat-label>Select a discipline:</mat-label>
+      <mat-select [(value)]="selectedDisc" required>
+        <mat-option value="Agric" class="discOption">Agriculture/Natural Resources</mat-option>
+        <mat-option value="Bios" class="discOption">Biological and Biomedical Sciences</mat-option>
+        <mat-option value="Comp" class="discOption">Computer Science/Info Sciences/Support Tech</mat-option>
+        <mat-option value="Eng" class="discOption">Engineering</mat-option>
+        <mat-option value="Healp" class="discOption">Health Professions</mat-option>
+        <mat-option value="Math" class="discOption">Mathematics and Statistics</mat-option>
+        <mat-option value="Phys" class="discOption">Physical Sciences</mat-option>
+        <mat-option value="Psyc" class="discOption">Psychology</mat-option>
+      </mat-select>
+      <mat-icon matPrefix>history_edu</mat-icon>
+    </mat-form-field>
+    <button mat-raised-button (click)="searchMentor()" color="primary" style="color: white; margin-left: 15px;">
+      <mat-icon>search</mat-icon>
+      Search
+    </button>
+    <div *ngIf="noMentorsFound">
+      <h5 style="color:#ffa826;font-size: 24px !important;">{{searchPrompt}}</h5>
+    </div>
+  </div>
+    <mat-grid-list *ngIf="!noMentorsFound" [cols]="(cardsLayout | async)?.gridColumns" rowHeight="350px"
+      class="cardsCont">
+      <mat-grid-tile *ngFor="let card of (cardsLayout | async)?.layoutItem" [colspan]="card.cols" [rowspan]="card.rows">
+        <mat-card class="dashboard-card">
+          <mat-card-header>
+            <mat-card-title>
+              <img src="/assets/img/{{card.Image}}" class="card-img-top" alt="user profile picture">
+              <h5 class="card-title">{{card.Firstname + ' '+ card.Lastname}}</h5>
+              <button mat-icon-button class="more-button" [ngbPopover]="card.Bio" [popoverTitle]="popTitle"
+                popoverClass="bioPop">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content class="dashboard-card-content">
+            <div>{{card.Job+' at '+card.Company}}</div>
+            <button mat-stroked-button color="primary" (click)="contactMentor(card)">
+              <mat-icon>send</mat-icon>
+              Contact
+            </button>
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+    <ng-template #popTitle><b>Bio</b></ng-template>
+</div>

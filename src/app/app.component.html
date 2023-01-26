@@ -1,0 +1,66 @@
+<mat-drawer-container>
+  <mat-drawer #drawer class="sidenav">
+    <button class="draw-btn" color="primary" mat-button routerLink="/customers">
+      <mat-icon>home</mat-icon>
+      Home
+    </button>
+    <button class="draw-btn" color="primary" mat-button routerLink="" *ngIf="Role === 'Student'">
+      <mat-icon>person_search</mat-icon>
+      Find a Mentor
+    </button>
+    <button class="draw-btn" color="primary" mat-button routerLink="">
+      <mat-icon>person</mat-icon>
+      Profile
+    </button>
+    <button class="draw-btn" color="primary" mat-button routerLink="">
+      <mat-icon>chat</mat-icon>
+      Messages
+    </button>
+  </mat-drawer>
+  <div>
+    <mat-toolbar class="header" *ngIf="accessToken">
+      <button class="menu-btn" mat-icon-button (click)="drawer.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <div class="logoDesign">
+        <img class="logoImage" src="/assets/img/prePair-logos_transparent.png">
+        <span class="name">PrePair</span>
+      </div>
+      <span class="spacer"></span>
+      <div class="routerCont">
+        <a mat-button class="nav-btn" color="primary" routerLink="/prepair/{{role_router}}/{{user_id}}/home" routerLinkActive="active">
+          <mat-icon>home</mat-icon>
+          Home
+        </a>
+        <a mat-button class="nav-btn" color="primary" routerLink="/prepair/{{role_router}}/{{user_id}}/find-mentor" *ngIf="Role === 'Student'" routerLinkActive="active">
+          <mat-icon>person_search</mat-icon>
+          Find a Mentor
+        </a>
+        <a mat-button class="nav-btn" color="primary" routerLink="/prepair/{{role_router}}/{{user_id}}/profile" routerLinkActive="active">
+          <mat-icon>person</mat-icon>
+          Profile
+        </a>
+        <a mat-button class="nav-btn" color="primary" routerLink="/prepair/{{role_router}}/{{user_id}}/messages" routerLinkActive="active">
+          <mat-icon>chat</mat-icon>
+          Messages
+        </a>
+      </div>
+      <span class="spacer"></span>
+      <div class="logoutCont">
+        <div class="user-picture-container" style="background-image: url(/assets/img/{{photo}});">
+        </div>
+        <a class="user-name">{{user_name}}</a>
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu class="header-menu" #menu="matMenu">
+          <button mat-menu-item (click)="logout()">
+            <mat-icon>logout</mat-icon>
+            Logout
+          </button>
+        </mat-menu>
+      </div>
+    </mat-toolbar>
+  </div>
+  <router-outlet></router-outlet>
+</mat-drawer-container>

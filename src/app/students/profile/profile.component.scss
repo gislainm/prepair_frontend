@@ -1,0 +1,90 @@
+.shadow {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
+}
+
+.profile-tab-nav {
+  min-width: 250px;
+  border-color: rgba(176, 175, 175, 0.759) !important;
+  border-right: 1px solid;
+}
+
+.tab-content {
+  flex: 1;
+}
+
+.container {
+  background-color: #3C4B67;
+  margin-top: 100px;
+  border-radius: 10px;
+  font-size: 18px;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.nav-pills a.nav-link {
+  padding: 15px 20px;
+  border-bottom: 1px solid #ffa726;
+  border-radius: 5;
+  color: white;
+  cursor: pointer;
+}
+
+.nav-pills a.nav-link:hover {
+  background-color: #1b1e4198;
+}
+
+.nav-pills .nav-link.active {
+  color: #ffa726;
+  background-color: #1b1e41;
+}
+
+.nav-pills a.nav-link i {
+  width: 20px;
+}
+
+.img-circle img {
+  height: 100px;
+  width: 100px;
+  border-radius: 100%;
+  border: 5px solid #fff;
+}
+
+.form-control-dark {
+  border-color: var(--bs-gray);
+}
+
+.form-control-dark:focus {
+  border-color: rgb(177, 171, 171);
+  box-shadow: 0 0 0 .25rem rgb(255, 255, 255);
+}
+
+.text-small {
+  font-size: 85%;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  height:500px;
+}
+
+mat-radio-group {
+  display: flex;
+  align-items: center;
+  padding-bottom: 16px;
+}
+
+mat-drawer-container {
+  background-color: #3C4B67;
+}
+
+mat-drawer {
+  background-color: #3C4B67;
+}
+
+.saveBtn {
+  background-color: #1b1e41c2;
+  margin: 12px;
+}

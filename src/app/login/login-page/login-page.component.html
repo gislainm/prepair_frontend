@@ -1,0 +1,57 @@
+<div class="container">
+  <div class="logoDesign">
+    <img class="logoDesign" src="/assets/img/prePair-logos_transparent.png">
+  </div>
+  <div class="logo-form">
+    <div class="logo">
+      <div>
+        <img id="ellipse" src="/assets/img/Ellipse 2.png" />
+        <h3>PrePair</h3>
+        <h6>Community based Mentorship for <br> college STEM students</h6>
+      </div>
+      <img id="logoimg" src="/assets/img/pre-pair_logo.png" alt="mentor and mentee cartoon" />
+    </div>
+    <div class="form">
+      <span class="title">Login</span>
+      <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="Enter your email" formControlName="email">
+          <mat-icon matPrefix>email</mat-icon>
+          <mat-error *ngIf="loginForm.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput placeholder="Enter your Password" [type]="hide ? 'password' : 'text'"
+            formControlName="Password">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+          <mat-icon matPrefix>lock</mat-icon>
+          <mat-error *ngIf="loginForm.invalid">{{getPwdErrorMessage()}}</mat-error>
+        </mat-form-field>
+        <div class="checkbox-text">
+          <div class="checkbox-content">
+            <input type="checkbox" id="logCheck">
+            <label for="logCheck" class="text">Remember me</label>
+          </div>
+
+          <a href="#" class="text" style="color: #651fff;">Forgot password?</a>
+        </div>
+        <div class="btn-container">
+          <button mat-raised-button class="success" type="submit" [disabled]="loginForm.invalid">
+            Login
+          </button>
+          <p *ngIf="errorMessage" class="erroMessage">
+            {{errorMessage}}</p>
+        </div>
+      </form>
+      <div class="login-signup">
+        <span class="text">Not a member?
+          <a routerLink="/prepair/register"class="text signup-link" style="color: #ffa726;" >Signup Now</a>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,91 @@
+mat-grid-list {
+  display: flex;
+  flex-wrap: wrap;
+  color: white;
+}
+
+ngb-carousel {
+  width: 100%;
+}
+
+.carousel_img {
+  width: 100%;
+  height: auto;
+}
+
+.logo-home {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.logoDesign {
+  width: 20%;
+  top: 0;
+  left: 0;
+}
+
+.vision {
+  margin-bottom: 3%;
+  height: 50%;
+  background: #e1a210ce;
+  font-weight: 400;
+  padding-top: 10%;
+  padding-bottom: 5%;
+  padding-left: 2%;
+  padding-right: 2%;
+}
+
+.mission {
+  height: 50%;
+  font-weight: 400;
+  background-color: aliceblue;
+  color: black;
+  padding-top: 10%;
+  padding-bottom: 5%;
+  padding-left: 2%;
+  padding-right: 2%;
+}
+
+.mission-vision {
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+mat-card-title {
+  font-weight: 700;
+  font-size: large;
+}
+
+mat-card-header {
+  display: flex;
+  justify-content: center;
+}
+
+button {
+  margin-left: 3%;
+  margin-top: 2%;
+  font-size: 18px;
+  border-radius: 3px;
+  text-align: center;
+  color: #fff !important;
+  font-weight: 400;
+  padding: 5px 25px;
+  border: none;
+  min-width: 300px;
+}
+
+.home-btn {
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 999px) {
+  .mission-vision {
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}

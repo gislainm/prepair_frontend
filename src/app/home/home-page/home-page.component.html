@@ -1,0 +1,83 @@
+<div class="container">
+  <div class="logo-home">
+    <img class="logoDesign" src="/assets/img/prePair-logos_transparent.png">
+  </div>
+  <mat-grid-list [cols]="columnNum" [rowHeight]="rowHeight" gutterSize="10px">
+    <mat-grid-tile [colspan]="2">
+      <ngb-carousel *ngIf="true">
+        <ng-template ngbSlide>
+          <div class="picsum-img-wrapper">
+            <img src="/assets/img/photo1.jpg" alt="Find a mentor" class="carousel_img" />
+          </div>
+          <div class="carousel-caption">
+            <h3>Find a Mentor</h3>
+            <p>Position yourself to be successful in your career through career guidance.</p>
+          </div>
+        </ng-template>
+        <ng-template ngbSlide>
+          <div class="picsum-img-wrapper">
+            <img src="/assets/img/photo2.jpeg" alt="Growth" class="carousel_img" />
+          </div>
+          <div class="carousel-caption">
+            <h3>Growth</h3>
+            <p>Find guided growth in your career</p>
+          </div>
+        </ng-template>
+        <ng-template ngbSlide>
+          <div class="picsum-img-wrapper">
+            <img src="/assets/img/photo3.jpg" alt="Be a mentor" class="carousel_img" />
+          </div>
+          <div class="carousel-caption">
+            <h3>Be a Mentor</h3>
+            <p>Impact someone's life today by providing the guidance and mentorship you wish you had.</p>
+          </div>
+        </ng-template>
+        <ng-template ngbSlide>
+          <div class="picsum-img-wrapper">
+            <img src="/assets/img/photo4.jpg" alt="Community based" class="carousel_img" />
+          </div>
+          <div class="carousel-caption">
+            <h3>Community based</h3>
+            <p>For the community By the community.</p>
+          </div>
+        </ng-template>
+      </ngb-carousel>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="missionSpan">
+      <div class="mission-vision">
+        <mat-card class="vision">
+          <mat-card-header>
+            <mat-card-title>OUR VISION</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p>
+              Potential is equally distributed; resources are not. PrePair aims to
+              provide resources necessary for college STEM students to succeed in their
+              careers through community based mentorship. Our movement priorities relationships
+              and fuels opportunity for STEM students who needs mentorship and guidance.
+            </p>
+          </mat-card-content>
+        </mat-card>
+        <mat-card class="mission">
+          <mat-card-header>
+            <mat-card-title>OUR MISSION</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p>
+              <b>PrePair's</b> mission is to make mentorship and career guidance widely available for STEM
+              students in college especially first generation students and students from marginalized
+              communities.
+            </p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <div class="home-btn">
+    <button mat-raised-button color="warn" (click)="navigateToRegister()">Signup as a Student/Mentor</button>
+    <button mat-raised-button color="primary" (click)="navigateToLogin()">Login</button>
+  </div>
+  <ngx-spinner type="ball-climbing-dot" bdColor="rgba(8, 8, 48,0.9)" size="large" color="red"
+    template="<img src='/assets/img/spinner.gif'/>">
+  </ngx-spinner>
+</div>
