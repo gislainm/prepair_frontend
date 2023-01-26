@@ -48,7 +48,7 @@ export class AuthenticaUserService {
     return this.http.put(`${environment.apiURL}prepair/updateUserPwd`,user);
   }
   getMentors(disc:string){
-    return this.http.get(`${environment.apiURL}getMentors/${disc}`);
+    return this.http.get(`${environment.apiURL}prepair/getMentors/${disc}`);
   }
   getChatRooms(user_id:string){
     return this.http.get(`${environment.apiURL}prepair/getRooms/${user_id}`);
