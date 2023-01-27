@@ -136,6 +136,7 @@ export class MessageComponent implements OnInit {
       this.newMentorMessFirstname = mentor.Firstname;
       this.newMentorMessLastname = mentor.Lastname;
       this.serviceCollabs.push({collaborator:mentor,lastMessage:''});
+      this.collaborators = this.serviceCollabs;
       this.firstMessaMentor = true;
     }else{
       this.firstMessaMentor = false;
