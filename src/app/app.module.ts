@@ -12,6 +12,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatMenuModule} from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { AuthenticaUserService } from './authentica-user.service';
 import { IauthUser } from './user.interface';
 
@@ -44,6 +45,7 @@ const refreshToken = (stateService:AuthenticaUserService)=>{
     MatMenuModule,
     MatSidenavModule,
     MatToolbarModule,
+    MatSnackBarModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [{

@@ -21,6 +21,7 @@ export class MessageComponent implements OnInit {
   serviceCollabs:any[] = [];
   searchedCollabs:any[]=[];
   selectedMess:string = '';
+  selectMessEmail:string = '';
   selectedColab:string = '';
   activeRoom!:ChatRoom;
   messageLoaded:boolean = false;
@@ -28,7 +29,14 @@ export class MessageComponent implements OnInit {
   newMentorMess_Id:(string|null) = null;
   newMentorMessFirstname:(string|null) = null;
   newMentorMessLastname:(string|null) = null;
-  constructor(private _ngZone:NgZone,private stateService:AuthenticaUserService){}
+  newMentorMessEmail:(string|null) = null;
+  user_name!:string;
+  state!:IauthUser;
+  constructor(private _ngZone:NgZone,private stateService:AuthenticaUserService){
+    this.stateService.state.subscribe((state:IauthUser)=>{
+      this.user_name= state.user.Firstname + " "+state.user.Lastname;
+    })
+  }
   @ViewChild('autosize') autosize!: CdkTextareaAutosize;
   triggerResize() {
     this._ngZone.onStable.pipe(take(1)).subscribe(() => this.autosize.resizeToFitContent(true));
@@ -48,7 +56,7 @@ export class MessageComponent implements OnInit {
             const collaborator = chatRoom.participants.find((user:any)=>user._id !== this.user_id)
             let lastMessage = chatRoom.messages[chatRoom.messages.length -1].messageBody;
             if(lastMessage.length>34){
-              lastMessage = lastMessage.slice(0,33)+'...'
+              lastMessage = lastMessage.slice(0,40)+'...'
             }
             this.serviceCollabs.push({collaborator,lastMessage});
           })
@@ -62,7 +70,13 @@ export class MessageComponent implements OnInit {
     })
   }
   sendMessage(){
-    this.stateService.sendMessage({receiver:this.selectedMess,sender:this.user_id,messageBody:this.messageForm.value.message as string})
+    this.stateService.sendMessage({
+      receiver:this.selectedMess,
+      sender:this.user_id,
+      messageBody:this.messageForm.value.message as string,
+      senderName:this.user_name as string,
+      receiverEmail:this.selectMessEmail as string
+    })
       .subscribe({
         next:(data:any)=>{
           if(data.error){
@@ -74,7 +88,7 @@ export class MessageComponent implements OnInit {
               this.activeRoom.messages = data.data.messages;
             }
             if(lastMessage.length>34){
-              lastMessage = lastMessage.slice(0,33)+'...'
+              lastMessage = lastMessage.slice(0,40)+'...'
             }
             const currentCollab = this.collaborators.find(collab=>collab.collaborator._id === this.selectedMess);
             currentCollab.lastMessage = lastMessage;
@@ -101,7 +115,13 @@ export class MessageComponent implements OnInit {
 
   }
   sendMessageToNewMentor(){
-    this.stateService.sendMessage({receiver:this.newMentorMess_Id as string,sender:this.user_id,messageBody:this.messageForm.value.message as string})
+    this.stateService.sendMessage({
+      receiver:this.newMentorMess_Id as string,
+      sender:this.user_id,
+      messageBody:this.messageForm.value.message as string,
+      senderName:this.user_name as string,
+      receiverEmail:this.newMentorMessEmail as string
+    })
     .subscribe({
       next:(data:any)=>{
         if(data.error){
@@ -113,11 +133,11 @@ export class MessageComponent implements OnInit {
           this.firstMessaMentor = false;
           const mentor_id = this.newMentorMess_Id as string;
           this.newMentorMess_Id = null;
-          this.selectRoom(mentor_id,this.newMentorMessFirstname!,this.newMentorMessLastname!);
+          this.selectRoom(mentor_id,this.newMentorMessFirstname!,this.newMentorMessLastname!,this.newMentorMessEmail!);
           this.newMentorMessFirstname = null;
           this.newMentorMessLastname = null;
           if(lastMessage.length>34){
-            lastMessage = lastMessage.slice(0,33)+'...'
+            lastMessage = lastMessage.slice(0,40)+'...'
           }
           const currentCollab = this.collaborators.find(collab=>collab.collaborator._id === this.selectedMess);
           currentCollab.lastMessage = lastMessage;
@@ -135,6 +155,7 @@ export class MessageComponent implements OnInit {
       this.newMentorMess_Id = mentor._id;
       this.newMentorMessFirstname = mentor.Firstname;
       this.newMentorMessLastname = mentor.Lastname;
+      this.newMentorMessEmail = mentor.email;
       this.serviceCollabs.push({collaborator:mentor,lastMessage:''});
       this.collaborators = this.serviceCollabs;
       this.firstMessaMentor = true;
@@ -142,9 +163,10 @@ export class MessageComponent implements OnInit {
       this.firstMessaMentor = false;
     }
   }
-  selectRoom(id:string,Firstname:string,Lastname:string){
+  selectRoom(id:string,Firstname:string,Lastname:string,email:string){
     if(id !== this.newMentorMess_Id){
       this.selectedMess = id;
+      this.selectMessEmail = email;
       this.selectedColab = Firstname+" "+Lastname;
       this.loadMessage(id);
       this.firstMessaMentor = false;

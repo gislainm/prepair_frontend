@@ -24,6 +24,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -52,7 +53,8 @@ import { NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap';
     MatExpansionModule,
     MatTooltipModule,
     NgbPopoverModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    MatSnackBarModule
   ]
 })
 export class StudentsModule { }

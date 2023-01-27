@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { AuthenticaUserService } from 'src/app/authentica-user.service';
 import { IauthUser,Role,Gender,User } from 'src/app/user.interface';
 import { HttpErrorResponse } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-profile',
@@ -24,7 +25,7 @@ export class ProfileComponent implements OnInit {
   user_email!:string;
   user_Imange!:string;
   errorMessage:string = '';
-  constructor(private stateService:AuthenticaUserService){}
+  constructor(private stateService:AuthenticaUserService,private _snackBar: MatSnackBar){}
   accountForm=inject(FormBuilder).nonNullable.group({
     Firstname:['',[Validators.required]],
     Lastname:['',[Validators.required]],
@@ -55,15 +56,33 @@ export class ProfileComponent implements OnInit {
       next:(data:any)=>{
         if(data.error){
           this.errorMessage = data.message;
+          this._snackBar.open(data.message,'',{
+            panelClass: ['error-snackbar'],
+            duration: 2000,
+            horizontalPosition: 'right',
+            verticalPosition: 'top'
+          })
         }else{
           const updatedUser:User = data.data as User;
           const accessToken:string = this.stateService.accessToken as string;
           this.stateService.state.next({accessToken:accessToken,user:updatedUser} as IauthUser);
           localStorage.setItem('STATE',JSON.stringify({accessToken:accessToken,user:updatedUser}));
+          this._snackBar.open('Account Info updated successfully','',{
+            panelClass: ['success-snackbar'],
+            duration: 2000,
+            horizontalPosition: 'right',
+            verticalPosition: 'top'
+          });
         }
       },
       error:(error:HttpErrorResponse)=>{
         this.errorMessage = error.error.message;
+        this._snackBar.open(error.error.message,'',{
+          duration:2000,
+          panelClass:['error-snackbar'],
+          horizontalPosition: 'right',
+            verticalPosition: 'top'
+        })
         console.log(this.errorMessage);
       }
     })
@@ -78,16 +97,34 @@ export class ProfileComponent implements OnInit {
       next:(data:any)=>{
         if(data.error){
           this.errorMessage = data.message;
+          this._snackBar.open(data.message,'',{
+            panelClass: ['error-snackbar'],
+            duration: 2000,
+            horizontalPosition: 'right',
+            verticalPosition: 'top'
+          })
         }else{
           const updatedUser:User = data.data as User;
           const accessToken:string = this.stateService.accessToken as string;
           console.log({accessToken,updatedUser});
           this.stateService.state.next({accessToken:accessToken,user:updatedUser} as IauthUser);
           localStorage.setItem('STATE',JSON.stringify({accessToken:accessToken,user:updatedUser}));
+          this._snackBar.open('Password Info updated successfully','',{
+            panelClass: ['success-snackbar'],
+            duration: 2000,
+            horizontalPosition: 'right',
+            verticalPosition: 'top'
+          });
         }
       },
       error:(error:HttpErrorResponse)=>{
         this.errorMessage = error.error.message;
+        this._snackBar.open(error.error.message,'',{
+          duration:2000,
+          panelClass:['error-snackbar'],
+          horizontalPosition: 'right',
+            verticalPosition: 'top'
+        })
         console.log(this.errorMessage);
       }
     })
@@ -99,15 +136,33 @@ export class ProfileComponent implements OnInit {
       next:(data:any)=>{
         if(data.error){
           this.errorMessage = data.message;
+          this._snackBar.open(data.message,'',{
+            panelClass: ['error-snackbar'],
+            duration: 2000,
+            horizontalPosition: 'right',
+            verticalPosition: 'top'
+          })
         }else{
           const updatedUser:User = data.data as User;
           const accessToken:string = this.stateService.accessToken as string;
           this.stateService.state.next({accessToken:accessToken,user:updatedUser} as IauthUser);
           localStorage.setItem('STATE',JSON.stringify({accessToken:accessToken,user:updatedUser}));
+          this._snackBar.open('Career Info updated successfully','',{
+            panelClass: ['success-snackbar'],
+            duration: 2000,
+            horizontalPosition: 'right',
+            verticalPosition: 'top'
+          });
         }
       },
       error:(error:HttpErrorResponse)=>{
         this.errorMessage = error.error.message;
+         this._snackBar.open(error.error.message,'',{
+          duration:2000,
+          panelClass:['error-snackbar'],
+          horizontalPosition: 'right',
+            verticalPosition: 'top'
+        })
         console.log(this.errorMessage);
       }
     })

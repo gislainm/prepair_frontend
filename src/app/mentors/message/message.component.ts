@@ -14,16 +14,22 @@ import { Message,ChatRoom } from 'src/app/chat.interface';
 })
 export class MessageComponent implements OnInit {
   user_id!:string;
+  user_name!:string;
   searchInput:string='';
   chatRooms!:[ChatRoom];
   collaborators:any[] = [];
   serviceCollabs:any[] = [];
   searchedCollabs:any[]=[];
   selectedMess:string = '';
+  selectMessEmail:string = '';
   selectedColab:string = '';
   activeRoom!:ChatRoom;
   messageLoaded:boolean = false;
-  constructor(private _ngZone:NgZone,private stateService:AuthenticaUserService){}
+  constructor(private _ngZone:NgZone,private stateService:AuthenticaUserService){
+    this.stateService.state.subscribe((state:IauthUser)=>{
+      this.user_name= state.user.Firstname + " "+state.user.Lastname;
+    })
+  }
   @ViewChild('autosize') autosize!: CdkTextareaAutosize;
   triggerResize() {
     this._ngZone.onStable.pipe(take(1)).subscribe(() => this.autosize.resizeToFitContent(true));
@@ -43,7 +49,7 @@ export class MessageComponent implements OnInit {
             const collaborator = chatRoom.participants.find((user:any)=>user._id !== this.user_id)
             let lastMessage = chatRoom.messages[chatRoom.messages.length -1].messageBody;
             if(lastMessage.length>34){
-              lastMessage = lastMessage.slice(0,33)+'...'
+              lastMessage = lastMessage.slice(0,40)+'...'
             }
             this.serviceCollabs.push({collaborator,lastMessage});
             this.collaborators = this.serviceCollabs;
@@ -56,7 +62,13 @@ export class MessageComponent implements OnInit {
     })
   }
   sendMessage(){
-    this.stateService.sendMessage({receiver:this.selectedMess,sender:this.user_id,messageBody:this.messageForm.value.message as string})
+    this.stateService.sendMessage({
+      receiver:this.selectedMess,
+      sender:this.user_id,
+      messageBody:this.messageForm.value.message as string,
+      senderName:this.user_name as string,
+      receiverEmail:this.selectMessEmail
+    })
       .subscribe({
         next:(data:any)=>{
           if(data.error){
@@ -84,8 +96,9 @@ export class MessageComponent implements OnInit {
     }
 
   }
-  selectRoom(id:string,Firstname:string,Lastname:string){
+  selectRoom(id:string,Firstname:string,Lastname:string,email:string){
     this.selectedMess = id;
+    this.selectMessEmail = email;
     this.selectedColab = Firstname+" "+Lastname;
     this.loadMessage(id);
   }

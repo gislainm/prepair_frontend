@@ -3,11 +3,12 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { AuthenticaUserService } from 'src/app/authentica-user.service';
 import { IauthUser,Role,Gender,User } from 'src/app/user.interface';
 import { HttpErrorResponse } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
   hide = true;
@@ -23,7 +24,7 @@ export class ProfileComponent implements OnInit {
   female:boolean= this.genderC==="Female"? true:false;
   stud:boolean=this.roleC === "Student"?true:false;
   ment:boolean=this.roleC === "Mentor"?true:false;
-  constructor(private stateService:AuthenticaUserService){}
+  constructor(private stateService:AuthenticaUserService, private _snackBar: MatSnackBar){}
   accountForm=inject(FormBuilder).nonNullable.group({
     Firstname:['',[Validators.required]],
     Lastname:['',[Validators.required]],
@@ -47,20 +48,38 @@ export class ProfileComponent implements OnInit {
 
   updateAccount():void{
     const email = this.user_email;
-    const Updates = {...this.accountForm.value,Role:this.roleC,Gender:this.genderC}
+    const Updates = {...this.accountForm.value,Role:this.roleC,Gender:this.genderC};
     this.stateService.updateUserInfo({email,Updates}).subscribe({
       next:(data:any)=>{
         if(data.error){
           this.errorMessage = data.message;
+          this._snackBar.open(data.message,'',{
+            panelClass: ['error-snackbar'],
+            duration: 2000,
+            horizontalPosition: 'right',
+            verticalPosition: 'top'
+          })
         }else{
           const updatedUser:User = data.data as User;
           const accessToken:string = this.stateService.accessToken as string;
           this.stateService.state.next({accessToken:accessToken,user:updatedUser} as IauthUser);
           localStorage.setItem('STATE',JSON.stringify({accessToken:accessToken,user:updatedUser}));
+          this._snackBar.open('Account Info updated successfully','',{
+            panelClass: ['success-snackbar'],
+            duration: 2000,
+            horizontalPosition: 'right',
+            verticalPosition: 'top'
+          });
         }
       },
       error:(error:HttpErrorResponse)=>{
         this.errorMessage = error.error.message;
+        this._snackBar.open(error.error.message,'',{
+          duration:2000,
+          panelClass:['error-snackbar'],
+          horizontalPosition: 'right',
+            verticalPosition: 'top'
+        })
         console.log(this.errorMessage);
       }
     })
@@ -71,20 +90,39 @@ export class ProfileComponent implements OnInit {
     const formInput = {...this.passwordForm.value}
     const oldPwd = formInput.oldPassword;
     const newPwd = formInput.newPassword;
+    // const config = new MatSnackBarConfig()
     this.stateService.updateUserPwd({email,oldPwd,newPwd}).subscribe({
       next:(data:any)=>{
         if(data.error){
           this.errorMessage = data.message;
+          this._snackBar.open(data.message,'',{
+            panelClass: ['error-snackbar'],
+            duration: 2000,
+            horizontalPosition: 'right',
+            verticalPosition: 'top'
+          })
         }else{
           const updatedUser:User = data.data as User;
           const accessToken:string = this.stateService.accessToken as string;
           console.log({accessToken,updatedUser});
           this.stateService.state.next({accessToken:accessToken,user:updatedUser} as IauthUser);
           localStorage.setItem('STATE',JSON.stringify({accessToken:accessToken,user:updatedUser}));
+          this._snackBar.open('Password updated successfully','',{
+            panelClass: ['success-snackbar'],
+            duration: 2000,
+            horizontalPosition: 'right',
+            verticalPosition: 'top'
+          });
         }
       },
       error:(error:HttpErrorResponse)=>{
         this.errorMessage = error.error.message;
+        this._snackBar.open(error.error.message,'',{
+          duration:2000,
+          panelClass:['error-snackbar'],
+          horizontalPosition: 'right',
+            verticalPosition: 'top'
+        })
         console.log(this.errorMessage);
       }
     })
@@ -96,15 +134,33 @@ export class ProfileComponent implements OnInit {
       next:(data:any)=>{
         if(data.error){
           this.errorMessage = data.message;
+          this._snackBar.open(data.message,'',{
+            panelClass: ['error-snackbar'],
+            duration: 2000,
+            horizontalPosition: 'right',
+            verticalPosition: 'top'
+          })
         }else{
           const updatedUser:User = data.data as User;
           const accessToken:string = this.stateService.accessToken as string;
           this.stateService.state.next({accessToken:accessToken,user:updatedUser} as IauthUser);
           localStorage.setItem('STATE',JSON.stringify({accessToken:accessToken,user:updatedUser}));
+          this._snackBar.open('Education Info updated successfully','',{
+            panelClass: ['success-snackbar'],
+            duration: 2000,
+            horizontalPosition: 'right',
+            verticalPosition: 'top'
+          });
         }
       },
       error:(error:HttpErrorResponse)=>{
         this.errorMessage = error.error.message;
+        this._snackBar.open(error.error.message,'',{
+          duration:2000,
+          panelClass:['error-snackbar'],
+          horizontalPosition: 'right',
+            verticalPosition: 'top'
+        })
         console.log(this.errorMessage);
       }
     })

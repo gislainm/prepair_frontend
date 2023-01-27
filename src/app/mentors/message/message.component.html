@@ -10,7 +10,7 @@
       </div>
       <div class="discussion" [ngClass]="{'message-active':selectedMess=== collaborator.collaborator._id}"
         *ngFor="let collaborator of collaborators"
-        (click)="selectRoom(collaborator.collaborator._id,collaborator.collaborator.Firstname,collaborator.collaborator.Lastname)">
+        (click)="selectRoom(collaborator.collaborator._id,collaborator.collaborator.Firstname,collaborator.collaborator.Lastname,collaborator.collaborator.email)">
         <div class="photo" style="background-image: url(/assets/img/{{collaborator.collaborator.Image}});">
         </div>
         <div class="desc-contact">

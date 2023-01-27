@@ -53,7 +53,7 @@ export class AuthenticaUserService {
   getChatRooms(user_id:string){
     return this.http.get(`${environment.apiURL}prepair/getRooms/${user_id}`);
   }
-  sendMessage(message:{ receiver: string,sender: string,messageBody: string}){
+  sendMessage(message:{ receiver: string,sender: string,messageBody: string,senderName:string,receiverEmail:string}){
     return this.http.post(`${environment.apiURL}prepair/sendMessage`,message);
   }
 }

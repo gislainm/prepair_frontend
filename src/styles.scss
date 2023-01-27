@@ -40,7 +40,6 @@ $theme: map_merge($Frontend-theme, (background: $background));
 /* Importing Bootstrap SCSS file. */
 @import 'bootstrap/scss/bootstrap';
 
-
 html,
 body {
   height: 100%;
@@ -53,3 +52,19 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+.success-snackbar {
+  --mdc-snackbar-supporting-text-color: rgba(255, 255, 255) !important;
+  --mdc-snackbar-container-color: rgba(255, 167, 38) !important;
+}
+
+.error-snackbar {
+  --mdc-snackbar-container-color: rgba(191, 54, 12) !important;
+  --mdc-snackbar-supporting-text-color: rgba(255, 255, 255) !important;
+}
+
+.bioPop {
+  --bs-popover-bg: #3C4B67 !important;
+  --bs-popover-header-bg: #3C4B67 !important;
+  --bs-popover-header-color: white !important;
+  --bs-popover-body-color: white !important;
+}
