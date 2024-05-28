@@ -25,6 +25,10 @@ ngb-carousel {
   left: 0;
 }
 
+.container {
+  padding-bottom: 20px;
+}
+
 .vision {
   margin-bottom: 3%;
   height: 50%;
@@ -79,13 +83,16 @@ button {
 .home-btn {
   display: flex;
   justify-content: center;
+  @media (max-width: 999px) {
+    flex-direction: column;
+    margin-top: 20px;
+  }
 }
 
 @media (max-width: 999px) {
   .mission-vision {
-    height: auto;
     display: flex;
-    flex-direction: row;
+    flex-direction: col;
     justify-content: space-between;
   }
 }

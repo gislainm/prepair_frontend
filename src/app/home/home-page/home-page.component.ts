@@ -16,7 +16,7 @@ export class HomePageComponent implements OnInit {
   constructor(private spinner:NgxSpinnerService, private router:Router){
     if(window.innerWidth<1000){
       this.columnNum = 2;
-      this.rowHeight = '1:2';
+      this.rowHeight = '35em';
       this.missionSpan = 2;
     }else{
       this.columnNum = 3;
@@ -37,7 +37,7 @@ export class HomePageComponent implements OnInit {
     this.getScreenWidth = window.innerWidth;
     if (this.getScreenWidth<1000){
       this.columnNum = 2;
-      this.rowHeight = '1:2';
+      this.rowHeight = '35em';
       this.missionSpan = 2;
     }else{
       this.columnNum = 3;
