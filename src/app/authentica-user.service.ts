@@ -29,31 +29,33 @@ export class AuthenticaUserService {
   state:BehaviorSubject<IauthUser> = new BehaviorSubject(INIT_STATE);
   user_email:string='';
   accessToken:string = '';
+  private baseURL = environment.apiURL
   public MentorToMessage!:(User|null);
   constructor(private http:HttpClient) { }
   loginUser(user:Ilogin){
-    return this.http.post(`${environment.apiURL}prepair/login`,user);
+    console.log(this.baseURL)
+    return this.http.post(`${this.baseURL}prepair/login`, user);
   }
   registerStudent(user:Sregister){
-    return this.http.post(`${environment.apiURL}prepair/signup`,user);
+    return this.http.post(`${this.baseURL}prepair/signup`, user);
 
   }
   registerMentor(user:Mregister){
-    return this.http.post(`${environment.apiURL}prepair/signup`,user);
+    return this.http.post(`${this.baseURL}prepair/signup`, user);
   }
   updateUserInfo(user:any){
-    return this.http.put(`${environment.apiURL}prepair/updateUserInfo`,user);
+    return this.http.put(`${this.baseURL}prepair/updateUserInfo`, user);
   }
   updateUserPwd(user:any){
-    return this.http.put(`${environment.apiURL}prepair/updateUserPwd`,user);
+    return this.http.put(`${this.baseURL}prepair/updateUserPwd`, user);
   }
   getMentors(disc:string){
-    return this.http.get(`${environment.apiURL}prepair/getMentors/${disc}`);
+    return this.http.get(`${this.baseURL}prepair/getMentors/${disc}`);
   }
   getChatRooms(user_id:string){
-    return this.http.get(`${environment.apiURL}prepair/getRooms/${user_id}`);
+    return this.http.get(`${this.baseURL}prepair/getRooms/${user_id}`);
   }
   sendMessage(message:{ receiver: string,sender: string,messageBody: string,senderName:string,receiverEmail:string}){
-    return this.http.post(`${environment.apiURL}prepair/sendMessage`,message);
+    return this.http.post(`${this.baseURL}prepair/sendMessage`, message);
   }
 }
